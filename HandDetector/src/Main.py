@@ -4,10 +4,11 @@ Created on 2014年10月25日
 
 @author: Yang
 '''
-from Tkinter import *
+
 import numpy as np
 import cv2
 import csv
+from Tkinter import *
 
 #g_slider_position = 0
 
@@ -48,23 +49,26 @@ def showMainImage1(current_frame):
             box = cv2.cv.BoxPoints(cnt)
             box = np.int0(box)
             cv2.drawContours(frame1,[box],0,(0,0,255),2)
-            cv2.circle(frame1,(int(label[2]),int(label[3])),7,(0,0,255),-1)
-            cv2.circle(frame1,(int(prv_label[2]),int(prv_label[3])),7,(100,100,250),-1)
+            cv2.circle(frame1,(int(float(label[2])),int(float(label[3]))),7,(0,0,255),-1)
+            if prv_label[1]!="None":
+                cv2.circle(frame1,(int(float(prv_label[2])),int(float(prv_label[3]))),7,(100,100,250),-1)
         
         if label[1] == "Both":
             cnt1 = (float(label[2]),float(label[3])),(float(label[4]),float(label[5])),float(label[6])
             box1 = cv2.cv.BoxPoints(cnt1)
             box1 = np.int0(box1)
             cv2.drawContours(frame1,[box1],0,(0,0,255),2)
-            cv2.circle(frame1,(int(label[2]),int(label[3])),7,(0,0,255),-1)
-            cv2.circle(frame1,(int(prv_label[2]),int(prv_label[3])),7,(100,100,250),-1)
+            cv2.circle(frame1,(int(float(label[2])),int(float(label[3]))),7,(0,0,255),-1)
+            if prv_label[1]!="None":
+                cv2.circle(frame1,(int(float(prv_label[2])),int(float(prv_label[3]))),7,(100,100,250),-1)
             
             cnt2 = (float(label[8]),float(label[9])),(float(label[10]),float(label[11])),float(label[12])
             box2 = cv2.cv.BoxPoints(cnt2)
             box2 = np.int0(box2)
             cv2.drawContours(frame1,[box2],0,(0,0,255),2)
-            cv2.circle(frame1,(int(label[8]),int(label[9])),7,(0,0,255),-1)
-            cv2.circle(frame1,(int(prv_label[2]),int(prv_label[3])),7,(100,100,250),-1) 
+            cv2.circle(frame1,(int(float(label[8])),int(float(label[9]))),7,(0,0,255),-1)
+            if prv_label[1]!="None":
+                cv2.circle(frame1,(int(float(prv_label[8])),int(float(prv_label[9]))),7,(100,100,250),-1)
              
     rsFrame1 = cv2.resize(frame1,(320,240))
     rsFrame1 = cv2.copyMakeBorder(rsFrame1,2,2,2,2,cv2.BORDER_CONSTANT,value=(0,0,255))
@@ -91,23 +95,27 @@ def showMainImage2(current_frame):
             box = cv2.cv.BoxPoints(cnt)
             box = np.int0(box)
             cv2.drawContours(frame2,[box],0,(0,0,255),2)
-            cv2.circle(frame2,(int(label[2]),int(label[3])),7,(0,0,255),-1)
-            cv2.circle(frame2,(int(prv_label[2]),int(prv_label[3])),7,(100,100,250),-1)
+            cv2.circle(frame2,(int(float(label[2])),int(float(label[3]))),7,(0,0,255),-1)
+            if prv_label[1]!="None":
+                cv2.circle(frame2,(int(float(prv_label[2])),int(float(prv_label[3]))),7,(100,100,250),-1)
         
         if label[1] == "Both":
             cnt1 = (float(label[2]),float(label[3])),(float(label[4]),float(label[5])),float(label[6])
             box1 = cv2.cv.BoxPoints(cnt1)
             box1 = np.int0(box1)
             cv2.drawContours(frame2,[box1],0,(0,0,255),2)
-            cv2.circle(frame2,(int(label[2]),int(label[3])),7,(0,0,255),-1)
-            cv2.circle(frame2,(int(prv_label[2]),int(prv_label[3])),7,(100,100,250),-1)
+            cv2.circle(frame2,(int(float(label[2])),int(float(label[3]))),7,(0,0,255),-1)
+            if prv_label[1]!="None":
+                cv2.circle(frame2,(int(float(prv_label[2])),int(float(prv_label[3]))),7,(100,100,250),-1)
             
             cnt2 = (float(label[8]),float(label[9])),(float(label[10]),float(label[11])),float(label[12])
             box2 = cv2.cv.BoxPoints(cnt2)
             box2 = np.int0(box2)
             cv2.drawContours(frame2,[box2],0,(0,0,255),2)  
-            cv2.circle(frame2,(int(label[2]),int(label[3])),7,(0,0,255),-1)
-            cv2.circle(frame2,(int(prv_label[2]),int(prv_label[3])),7,(100,100,250),-1)
+            cv2.circle(frame2,(int(float(label[8])),int(float(label[9]))),7,(0,0,255),-1)
+            if prv_label[1]!="None":
+                cv2.circle(frame2,(int(float(prv_label[8])),int(float(prv_label[9]))),7,(100,100,250),-1)
+             
     #tempImage = cv2.cv.fromarray(frame2)
     #cv2.cv.DrawContours(tempImage, [box], (0,0,0), (255,255,255), 0)
     #im = np.asarray(tempImage)
@@ -165,11 +173,6 @@ def  showSkeleton(current_frame1,current_frame2,x):
                     cv2.line(frame2,point2[5],point2[7],(0,0,255),1)
                     cv2.line(frame2,point2[7],point2[9],(0,0,255),1)
                
-        
-                
-                #cv2.line(frame1,point[8],point[6],(0,0,255),1)
-
-        
         rsFrame1 = cv2.resize(frame1,(320,240))
         rsFrame1 = cv2.copyMakeBorder(rsFrame1,2,2,2,2,cv2.BORDER_CONSTANT,value=(0,0,255))
         rsFrame2 = cv2.resize(frame2,(320,240))
@@ -285,6 +288,8 @@ no_of_frames1 = int(cap1.get(7))
 no_of_frames2 = int(cap2.get(7))
 #switch = '0 : CLOSE \n1 : OPEN'
 if no_of_frames1 != 0 and no_of_frames2!=0:
+    b = Button(width = 1000, height = 100, text = 'Button1')
+    b.grid(row = 1, column = 0)
     cv2.createTrackbar("Silder1", "Video",0, no_of_frames1, silder1_display)
     cv2.createTrackbar("Silder2", "Video",0, no_of_frames2, silder2_display)
     #switch = 'show skeleton'
@@ -295,7 +300,7 @@ while cap1.isOpened() and cap2.isOpened() :
     k = cv2.waitKey(0) & 0xFF
     current_frame1 = cv2.getTrackbarPos("Silder1", "Video")
     current_frame2 = cv2.getTrackbarPos("Silder2", "Video")
-    if k == 49:
+    if k == 13:
         showSkeleton(current_frame1, current_frame2,1)
     if k == 27:
         break
